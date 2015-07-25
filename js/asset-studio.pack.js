@@ -2609,15 +2609,15 @@ Base = Base.extend({
     b.util = {};
     b.util.getMultBaseMdpi = function(c) {
         switch (c) {
-            case "xxxhdpi":
+            case "scale-400":
                 return 4;
-            case "xxhdpi":
+            case "scale-300":
                 return 3;
-            case "xhdpi":
+            case "scale-200":
                 return 2;
-            case "hdpi":
+            case "scale-150":
                 return 1.5;
-            case "mdpi":
+            case "scale-100":
                 return 1;
             case "ldpi":
                 return 0.75

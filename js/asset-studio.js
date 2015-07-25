@@ -5005,11 +5005,11 @@ studio.util = {};
 
 studio.util.getMultBaseMdpi = function(density) {
   switch (density) {
-    case 'xxxhdpi': return 4.00;
-    case  'xxhdpi': return 3.00;
-    case   'xhdpi': return 2.00;
-    case    'hdpi': return 1.50;
-    case    'mdpi': return 1.00;
+    case 'scale-400': return 4.00;
+    case  'scale-300': return 3.00;
+    case   'scale-200': return 2.00;
+    case    'scale-150': return 1.50;
+    case    'scale-100': return 1.00;
     case    'ldpi': return 0.75;
   }
   return 1.0;

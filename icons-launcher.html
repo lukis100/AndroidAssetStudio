@@ -89,7 +89,7 @@
     </div>
 
     <script>
-      var DENSITIES = {'xxxhdpi':1,'xxhdpi':1, 'xhdpi':1, 'hdpi':1, 'mdpi':1, 'web':1};
+      var DENSITIES = {'scale-400':1,'scale-300':1, 'scale-200':1, 'scale-150':1, 'scale-100':1, 'web':1};
 
       $(studio.checkBrowser);
       imagelib.ALLOW_MANUAL_RESCALE = true;
@@ -130,44 +130,44 @@
 
       var PARAM_RESOURCES = {
          'web-iconSize': { w: 512, h: 512 },
-        'hdpi-iconSize': { w:  72, h:  72 },
-        'mdpi-iconSize': { w:  48, h:  48 },
+        'scale-150-iconSize': { w:  72, h:  72 },
+        'scale-100-iconSize': { w:  48, h:  48 },
 
          'web-bevel-targetRect': { x: 32, y: 32, w: 448, h: 448 },
-        'hdpi-bevel-targetRect': { x:  4, y:  4, w:  64, h:  64 },
-        'mdpi-bevel-targetRect': { x:  3, y:  3, w:  42, h:  42 },
+        'scale-150-bevel-targetRect': { x:  4, y:  4, w:  64, h:  64 },
+        'scale-100-bevel-targetRect': { x:  3, y:  3, w:  42, h:  42 },
 
          'web-none-targetRect': { x: 32, y: 32, w: 448, h: 448 },
-        'hdpi-none-targetRect': { x:  4, y:  4, w:  64, h:  64 },
-        'mdpi-none-targetRect': { x:  3, y:  3, w:  42, h:  42 },
+        'scale-150-none-targetRect': { x:  4, y:  4, w:  64, h:  64 },
+        'scale-100-none-targetRect': { x:  3, y:  3, w:  42, h:  42 },
 
          'web-circle-targetRect': { x: 21, y: 21, w: 470, h: 470 },
-        'hdpi-circle-targetRect': { x:  3, y:  3, w:  66, h:  66 },
-        'mdpi-circle-targetRect': { x:  2, y:  2, w:  44, h:  44 },
+        'scale-150-circle-targetRect': { x:  3, y:  3, w:  66, h:  66 },
+        'scale-100-circle-targetRect': { x:  2, y:  2, w:  44, h:  44 },
 
          'web-square-targetRect': { x: 53, y: 53, w: 406, h: 406 },
-        'hdpi-square-targetRect': { x:  7, y:  7, w:  57, h:  57 },
-        'mdpi-square-targetRect': { x:  5, y:  5, w:  38, h:  38 },
+        'scale-150-square-targetRect': { x:  7, y:  7, w:  57, h:  57 },
+        'scale-100-square-targetRect': { x:  5, y:  5, w:  38, h:  38 },
 
          'web-vrect-targetRect': { x: 85, y: 21, w: 342, h: 470 },
-        'hdpi-vrect-targetRect': { x: 12, y:  3, w:  48, h:  66 },
-        'mdpi-vrect-targetRect': { x:  8, y:  2, w:  32, h:  44 },
+        'scale-150-vrect-targetRect': { x: 12, y:  3, w:  48, h:  66 },
+        'scale-100-vrect-targetRect': { x:  8, y:  2, w:  32, h:  44 },
 
          'web-hrect-targetRect': { x: 21, y: 85, w: 470, h: 342 },
-        'hdpi-hrect-targetRect': { x:  3, y: 12, w:  66, h:  48 },
-        'mdpi-hrect-targetRect': { x:  2, y:  8, w:  44, h:  32 },
+        'scale-150-hrect-targetRect': { x:  3, y: 12, w:  66, h:  48 },
+        'scale-100-hrect-targetRect': { x:  2, y:  8, w:  44, h:  32 },
 
         'web-square-dogear-targetRect': { x: 53, y: 149, w: 406, h: 312 },
-       'hdpi-square-dogear-targetRect': { x:  7, y:  21, w:  57, h:  43 },
-       'mdpi-square-dogear-targetRect': { x:  5, y:  14, w:  38, h:  29 },
+       'scale-150-square-dogear-targetRect': { x:  7, y:  21, w:  57, h:  43 },
+       'scale-100-square-dogear-targetRect': { x:  5, y:  14, w:  38, h:  29 },
 
         'web-vrect-dogear-targetRect': { x: 85, y: 117, w: 342, h: 374 },
-       'hdpi-vrect-dogear-targetRect': { x: 12, y:  17, w:  48, h:  52 },
-       'mdpi-vrect-dogear-targetRect': { x:  8, y:  11, w:  32, h:  35 },
+       'scale-150-vrect-dogear-targetRect': { x: 12, y:  17, w:  48, h:  52 },
+       'scale-100-vrect-dogear-targetRect': { x:  8, y:  11, w:  32, h:  35 },
 
         'web-hrect-dogear-targetRect': { x: 21, y: 85, w: 374, h: 342 },
-       'hdpi-hrect-dogear-targetRect': { x:  3, y: 12, w:  52, h:  48 },
-       'mdpi-hrect-dogear-targetRect': { x:  2, y:  8, w:  35, h:  32 }
+       'scale-150-hrect-dogear-targetRect': { x:  3, y: 12, w:  52, h:  48 },
+       'scale-100-hrect-dogear-targetRect': { x:  2, y:  8, w:  35, h:  32 }
       };
 
       /**
@@ -188,8 +188,9 @@
           return;
 
         var values = form.getValues();
+		var sourceName = values['source'].name;
 
-        var iconName = 'ic_launcher';
+        var iconName = values['name'];//var iconName = 'ic_launcher';
         zipper.clear();
         zipper.setZipFilename(iconName + '.zip');
 
@@ -211,16 +212,16 @@
 
             var mult = studio.util.getMultBaseMdpi(density);
             var iconSize = PARAM_RESOURCES[density + '-iconSize']
-                || studio.util.multRound(PARAM_RESOURCES['mdpi-iconSize'], mult);
+                || studio.util.multRound(PARAM_RESOURCES['scale-100-iconSize'], mult);
             var targetRect = PARAM_RESOURCES[density + '-' + backgroundShape + '-targetRect']
-                || studio.util.multRound(PARAM_RESOURCES['mdpi-' + backgroundShape + '-targetRect'],
+                || studio.util.multRound(PARAM_RESOURCES['scale-100-' + backgroundShape + '-targetRect'],
                    mult);
 
             var outCtx = imagelib.drawing.context(iconSize);
             var tmpCtx = imagelib.drawing.context(iconSize);
 
-            if ((values['foreground'].type == 'text' ||
-                values['foreground'].type == 'clipart') &&
+            if ((values['source'].type == 'text' ||
+                values['source'].type == 'clipart') &&
                 values['foreColor'].alpha == 0) {
               values['foreColor'].alpha = 100;
             }
@@ -379,7 +380,7 @@
             zipper.add({
               name: (density == 'web') ?
                   ('web_hi_res_512.png') :
-                  ('res/mipmap-' + density + '/ic_launcher.png'),
+                  ('assets/scale-' + density + '/' + iconName + '.png'),//('res/mipmap-' + density + '/ic_launcher.png'),
               base64data: outCtx.canvas.toDataURL().match(/;base64,(.+)/)[1]
             });
 
@@ -391,8 +392,8 @@
           }
         };
 
-        if (values['foreground']) {
-          continue_(values['foreground'].ctx);
+        if (values['source']) {
+          continue_(values['source'].ctx);
         } else {
           continue_(null);
         }
@@ -400,14 +401,28 @@
 
       var form = new studio.forms.Form('iconform', {
         onChange: function(field) {
+          var values = form.getValues();
+          if ((!field || field.id_ == 'source')
+              && values['source'] && values['source'].name) {
+            var name = values['source'].name.split('.')[0];
+            name = studio.util.sanitizeResourceName(name); //name = 'ic_action_' + studio.util.sanitizeResourceName(name);
+            if (name != nameField.getValue()) {
+              nameField.setValue(name);
+            }
+          }
           regenerate();
         },
         fields: [
-          new studio.forms.ImageField('foreground', {
-            title: 'Foreground',
+          new studio.forms.ImageField('source', {
+            title: 'Source',
             maxFinalSize: { w: 720, h: 720 }, // max render size, for SVGs
             defaultValueTrim: 1
           }),
+          (nameField = new studio.forms.TextField('name', {
+            title: 'Name',
+            helpText: 'Used when generating ZIP files.',
+            defaultValue: 'img_example'
+          })),
           new studio.forms.ColorField('foreColor', {
             title: 'Color',
             helpText: 'For transparent foregrounds',
