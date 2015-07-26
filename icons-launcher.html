@@ -193,8 +193,8 @@
         var iconName = values['name'];//var iconName = 'ic_launcher';
         zipper.clear();
         zipper.setZipFilename(iconName + '.zip');
-
-        var continue_ = function(foreCtx) {
+		
+		var continue_ = function(foreCtx) {
           var backgroundShape = values['backgroundShape'];
           if (values['effects'] == 'dogear' &&
              (backgroundShape == 'square' || backgroundShape == 'hrect' || backgroundShape == 'vrect')) {
@@ -211,11 +211,19 @@
             }
 
             var mult = studio.util.getMultBaseMdpi(density);
-            var iconSize = PARAM_RESOURCES[density + '-iconSize']
+			var manifestAsset = values['manifestAsset'];
+			if(manifestAsset == 'mas44'){
+              var iconSize = studio.util.multRound({ w:  44, h:  44 }, mult);
+              var targetRect = studio.util.multRound(PARAM_RESOURCES['scale-100-' + backgroundShape + '-targetRect'],
+                   mult);              
+			}
+			else{
+              var iconSize = PARAM_RESOURCES[density + '-iconSize']
                 || studio.util.multRound(PARAM_RESOURCES['scale-100-iconSize'], mult);
-            var targetRect = PARAM_RESOURCES[density + '-' + backgroundShape + '-targetRect']
+              var targetRect = PARAM_RESOURCES[density + '-' + backgroundShape + '-targetRect']
                 || studio.util.multRound(PARAM_RESOURCES['scale-100-' + backgroundShape + '-targetRect'],
                    mult);
+            }
 
             var outCtx = imagelib.drawing.context(iconSize);
             var tmpCtx = imagelib.drawing.context(iconSize);
@@ -380,7 +388,7 @@
             zipper.add({
               name: (density == 'web') ?
                   ('web_hi_res_512.png') :
-                  ('assets/' + density + '/' + iconName + '.png'),//('res/mipmap-' + density + '/ic_launcher.png'),
+                  ('assets/' + iconName + '.' + density + '.png'),//('assets/' + density + '/' + iconName + '.png'),//('res/mipmap-' + density + '/ic_launcher.png'),
               base64data: outCtx.canvas.toDataURL().match(/;base64,(.+)/)[1]
             });
 
@@ -417,6 +425,17 @@
             title: 'Source',
             maxFinalSize: { w: 720, h: 720 }, // max render size, for SVGs
             defaultValueTrim: 1
+          }),
+		  new studio.forms.EnumField('manifestAsset', {
+            title: 'Manifest Asset',
+            buttons: true,
+            options: [
+              { id: 'mas71', title: 'Square71x71' },
+              { id: 'mas150', title: 'Square150x150' },
+              { id: 'mas44', title: 'Square44x44' },
+              { id: 'maw310', title: 'Wide310x150' }
+            ],
+            defaultValue: 'mas71'
           }),
           (nameField = new studio.forms.TextField('name', {
             title: 'Name',
