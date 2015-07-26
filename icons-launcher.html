@@ -212,7 +212,11 @@
 
             var mult = studio.util.getMultBaseMdpi(density);
 			var manifestAsset = values['manifestAsset'];
-			if(manifestAsset == 'mas44'){
+			if (density == 'web'){
+              var iconSize = PARAM_RESOURCES[density + '-iconSize'];
+              var targetRect = PARAM_RESOURCES[density + '-' + backgroundShape + '-targetRect'];
+			}
+			else if (manifestAsset == 'mas44'){
               var iconSize = studio.util.multRound({ w:  44, h:  44 }, mult);
               var targetRect = studio.util.multRound(PARAM_RESOURCES['scale-100-' + backgroundShape + '-targetRect'],
                    mult);              
