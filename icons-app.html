@@ -211,16 +211,20 @@
               }
             }
 			
-			if (sourceName != values['source'].name && foreCtx !== undefined){
-			  sourceName = values['source'].name;
-			  // hack: this can be written better
-			  form.fields_[2].setValue(foreCtx.canvas.width/4);
-			  form.fields_[3].setValue(foreCtx.canvas.height/4);
-		    }
-
 			var width100 = values['width100'];
 			var height100 = values['height100'];
 			
+			if (sourceName != values['source'].name && foreCtx !== undefined){
+			  sourceName = values['source'].name;
+			  // hack: this can be written better
+			  var w = foreCtx.canvas.width/4;
+			  var h = foreCtx.canvas.height/4;
+			  form.fields_[2].setValue(w);
+			  form.fields_[3].setValue(h);
+			  width100 = w;
+			  height100 = h;
+		    }
+
 			var mult = studio.util.getMultBaseMdpi(density);
 			var manifestAsset = values['manifestAsset'];
 			if (density == 'web'){
@@ -445,7 +449,7 @@
             defaultValue: '44'
           })),
 		  (heightField = new studio.forms.TextField('height100', {
-            title: 'Scale-100 Height',
+            title: 'Height',
             helpText: 'Scale-100 height',
             defaultValue: '44'
           })),
