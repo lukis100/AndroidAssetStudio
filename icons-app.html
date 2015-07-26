@@ -71,7 +71,7 @@
     <div id="main-container">
       <div id="page-header">
         <a href="index.html">Android Asset Studio</a>
-        <h1>Manifest Images Generator</h1>
+        <h1>App Images Generator</h1>
       </div>
       <div id="inputs">
         <div id="inputs-form"></div>
@@ -90,6 +90,8 @@
 
     <script>
       var DENSITIES = {'scale-400':1,'scale-300':1, 'scale-200':1, 'scale-150':1, 'scale-100':1, 'web':1};
+	  
+	  var sourceName = null;
 
       $(studio.checkBrowser);
       imagelib.ALLOW_MANUAL_RESCALE = true;
@@ -188,9 +190,8 @@
           return;
 
         var values = form.getValues();
-		var sourceName = values['source'].name;
-
-        var iconName = values['name'];//var iconName = 'ic_launcher';
+		
+		var iconName = values['name'];//var iconName = 'ic_launcher';
         zipper.clear();
         zipper.setZipFilename(iconName + '.zip');
 		
@@ -209,48 +210,28 @@
                 continue;
               }
             }
+			
+			if (sourceName != values['source'].name && foreCtx !== undefined){
+			  sourceName = values['source'].name;
+			  // hack: this can be written better
+			  form.fields_[2].setValue(foreCtx.canvas.width/4);
+			  form.fields_[3].setValue(foreCtx.canvas.height/4);
+		    }
 
-            var mult = studio.util.getMultBaseMdpi(density);
+			var width100 = values['width100'];
+			var height100 = values['height100'];
+			
+			var mult = studio.util.getMultBaseMdpi(density);
 			var manifestAsset = values['manifestAsset'];
 			if (density == 'web'){
               var iconSize = PARAM_RESOURCES[density + '-iconSize'];
               var targetRect = PARAM_RESOURCES[density + '-' + backgroundShape + '-targetRect'];
 			}
-			else if (manifestAsset.substring(0,6) == 'square'){
-			  var width = manifestAsset.match(/\d+/)[0];
-			  var iconSize = studio.util.multRound({ w:  width, h:  width }, mult);
+			else {
+			  var iconSize = studio.util.multRound({ w:  width100, h:  height100 }, mult);
               var targetRect = studio.util.multRound(PARAM_RESOURCES['scale-100-' + backgroundShape + '-targetRect'],
                    mult);              
 			}
-			else if (manifestAsset.substring(0,4) == 'wide'){
-			  var width = manifestAsset.match(/\d+/g)[0];
-			  var height = manifestAsset.match(/\d+/g)[1];
-			  var iconSize = studio.util.multRound({ w:  width, h:  height }, mult);
-              var targetRect = studio.util.multRound(PARAM_RESOURCES['scale-100-' + backgroundShape + '-targetRect'],
-                   mult);              
-			}
-			else if (manifestAsset == 'storeLogo'){
-			  var iconSize = studio.util.multRound({ w:  50, h:  50 }, mult);
-              var targetRect = studio.util.multRound(PARAM_RESOURCES['scale-100-' + backgroundShape + '-targetRect'],
-                   mult);              
-			}
-			else if (manifestAsset == 'badgeLogo'){
-			  var iconSize = studio.util.multRound({ w:  24, h:  24 }, mult);
-              var targetRect = studio.util.multRound(PARAM_RESOURCES['scale-100-' + backgroundShape + '-targetRect'],
-                   mult);              
-			}
-			else if (manifestAsset == 'splashLogo'){
-			  var iconSize = studio.util.multRound({ w:  480, h:  800 }, mult);
-              var targetRect = studio.util.multRound(PARAM_RESOURCES['scale-100-' + backgroundShape + '-targetRect'],
-                   mult);              
-			}
-			else{
-              var iconSize = PARAM_RESOURCES[density + '-iconSize']
-                || studio.util.multRound(PARAM_RESOURCES['scale-100-iconSize'], mult);
-              var targetRect = PARAM_RESOURCES[density + '-' + backgroundShape + '-targetRect']
-                || studio.util.multRound(PARAM_RESOURCES['scale-100-' + backgroundShape + '-targetRect'],
-                   mult);
-            }
 
             var outCtx = imagelib.drawing.context(iconSize);
             var tmpCtx = imagelib.drawing.context(iconSize);
@@ -458,20 +439,16 @@
             helpText: 'Used when generating ZIP files.',
             defaultValue: 'img_example'
           })),
-          new studio.forms.EnumField('manifestAsset', {
-            title: 'Manifest Asset',
-            buttons: true,
-            options: [
-              { id: 'square71x71', title: 'Square71x71' },
-              { id: 'square150x150', title: 'Square150x150' },
-              { id: 'wide310x150', title: 'Wide310x150' },
-			  { id: 'square44x44', title: 'Square44x44' },
-              { id: 'storeLogo', title: 'Store Logo' },
-              { id: 'badgeLogo', title: 'Badge Logo' },
-              { id: 'splashLogo', title: 'Splash Logo' }
-            ],
-            defaultValue: 'square71x71'
-          }),
+		  (widthField = new studio.forms.TextField('width100', {
+            title: 'Width',
+			helpText: 'Scale-100 width',
+            defaultValue: '44'
+          })),
+		  (heightField = new studio.forms.TextField('height100', {
+            title: 'Scale-100 Height',
+            helpText: 'Scale-100 height',
+            defaultValue: '44'
+          })),
           new studio.forms.ColorField('foreColor', {
             title: 'Color',
             helpText: 'For transparent foregrounds',
