@@ -248,19 +248,25 @@
                    mult);               
 			}
 			else if (manifestAsset == 'storeLogo'){
-			  var iconSize = studio.util.multRound({ w:  50, h:  50 }, mult);
-              var targetRect = studio.util.multRound(PARAM_RESOURCES['scale-100-' + backgroundShape + '-targetRect'],
-                   mult);              
+			  var width = 50;
+			  var height = 50;
+			  var iconSize = studio.util.multRound({ w:  width, h:  height }, mult);
+			  var targetRect = studio.util.multRound(scaleSquare(PARAM_RESOURCES['scale-100-' + backgroundShape + '-targetRect'], width),
+                   mult);            
 			}
 			else if (manifestAsset == 'badgeLogo'){
+			  var width = 24;
+			  var height = 24;
 			  var iconSize = studio.util.multRound({ w:  24, h:  24 }, mult);
-              var targetRect = studio.util.multRound(PARAM_RESOURCES['scale-100-' + backgroundShape + '-targetRect'],
-                   mult);              
+			  var targetRect = studio.util.multRound(scaleSquare(PARAM_RESOURCES['scale-100-' + backgroundShape + '-targetRect'], width),
+                   mult);      
 			}
 			else if (manifestAsset == 'splashLogo'){
+			  var width = 480;
+			  var height = 800;
 			  var iconSize = studio.util.multRound({ w:  480, h:  800 }, mult);
-              var targetRect = studio.util.multRound(PARAM_RESOURCES['scale-100-' + backgroundShape + '-targetRect'],
-                   mult);              
+			  var targetRect = studio.util.multRound(scaleWide(PARAM_RESOURCES['scale-100-' + backgroundShape + '-targetRect'], width, height),
+                   mult);                          
 			}
 			else{
               var iconSize = PARAM_RESOURCES[density + '-iconSize']
