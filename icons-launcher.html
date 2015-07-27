@@ -181,10 +181,10 @@
 	  var scaleWide = function(c, width, height){
 	    var f = {};
 		// these values are not scaled correctly... more work needed
-		f.x = c.x * width / 48;
-		f.y = c.y * height / 48;
-		f.w = c.w * width / 48;
-		f.h = c.h * height / 48;
+		f.x = 0;
+		f.y = 0;
+		f.w = width;
+		f.h = height;
 	    return f;
 	  }
 
