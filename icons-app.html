@@ -172,6 +172,25 @@
        'scale-100-hrect-dogear-targetRect': { x:  2, y:  8, w:  35, h:  32 }
       };
 
+	  var scaleSquare = function(c, width){
+	    var f = {};
+		f.x = 0;
+		f.y = 0;
+		f.w = width;
+		f.h = width;
+	    return f;
+	  }
+	  
+	  var scaleWide = function(c, width, height){
+	    var f = {};
+		// these values are not scaled correctly... more work needed
+		f.x = 0;
+		f.y = 0;
+		f.w = width;
+		f.h = height;
+	    return f;
+	  }
+	  
       /**
        * Main image generation routine.
        */
@@ -233,8 +252,8 @@
 			}
 			else {
 			  var iconSize = studio.util.multRound({ w:  width100, h:  height100 }, mult);
-              var targetRect = studio.util.multRound(PARAM_RESOURCES['scale-100-' + backgroundShape + '-targetRect'],
-                   mult);              
+              var targetRect = studio.util.multRound(scaleWide(PARAM_RESOURCES['scale-100-' + backgroundShape + '-targetRect'], width100, height100),
+                   mult);  				   
 			}
 
             var outCtx = imagelib.drawing.context(iconSize);
