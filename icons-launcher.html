@@ -172,9 +172,10 @@
 	  
 	  var scaleSquare = function(c, width){
 	    var f = {};
-		for (k in c){
-		  f[k] = c[k] * width / 48;
-		}
+		f.x = 0;
+		f.y = 0;
+		f.w = width;
+		f.h = width;
 	    return f;
 	  }
 	  
