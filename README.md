@@ -1,15 +1,9 @@
-Android Asset Studio
+Windows Asset Studio
 ====================
 
-**[Open the Android Asset Studio](http://lukis100.github.io/AndroidAssetStudio/)**
+**[Open the Windows Asset Studio](http://lukis100.github.io/AndroidAssetStudio/)**
 
-A web-based set of tools for generating graphics and other assets that would eventually be in an Android application's res/ directory.
+Generate image assets for Windows Universal Platform apps:
 
-Currently available asset generators area available for:
-
-- Launcher icons
-- Action bar icons
-- Notification icons
-- Device-framed screenshots
-- Simple nine-patches
-
+- Manifest images
+- App images
