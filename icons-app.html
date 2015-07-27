@@ -238,8 +238,12 @@
 			  // hack: this can be written better
 			  var w = foreCtx.canvas.width/4;
 			  var h = foreCtx.canvas.height/4;
-			  form.fields_[2].setValue(w);
-			  form.fields_[3].setValue(h);
+			  var wForm = form.fields_[2];
+			  wForm.setValue(w);
+			  wForm.params_.defaultValue = w;
+			  var hForm = form.fields_[3];
+			  hForm.setValue(h);
+			  hForm.params_.defaultValue = h;
 			  width100 = w;
 			  height100 = h;
 		    }
@@ -496,7 +500,7 @@
               { id: 'vrect', title: 'Vertical Rectangle' },
               { id: 'hrect', title: 'Horizontal Rectangle' }
             ],
-            defaultValue: 'square'
+            defaultValue: 'none'
           }),
           new studio.forms.ColorField('backColor', {
             title: 'Background',
