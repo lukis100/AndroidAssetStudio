@@ -5009,6 +5009,7 @@ studio.util.getMultBaseMdpi = function(density) {
     case  'scale-300': return 3.00;
     case   'scale-200': return 2.00;
     case    'scale-150': return 1.50;
+    case    'scale-125': return 1.25;
     case    'scale-100': return 1.00;
     case    'ldpi': return 0.75;
   }

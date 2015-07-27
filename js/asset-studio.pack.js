@@ -2617,6 +2617,8 @@ Base = Base.extend({
                 return 2;
             case "scale-150":
                 return 1.5;
+            case "scale-125":
+                return 1.25;
             case "scale-100":
                 return 1;
             case "ldpi":
