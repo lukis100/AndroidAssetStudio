@@ -1609,7 +1609,7 @@ Base = Base.extend({
             }
         }
         if (!e) {
-            $("<div>").addClass("browser-unsupported-note ui-state-highlight").attr("title", "Your browser is not supported.").append($('<span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 50px 0;">')).append($("<p>").html('Currently only <a href="http://www.google.com/chrome">Google Chrome</a> is recommended and supported. Your mileage may vary with other browsers.')).prependTo("body")
+            $("<div>").addClass("browser-unsupported-note ui-state-highlight").attr("title", "Your browser is not supported.").append($('<span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 50px 0;">')).append($("<p>").html('For better results, provide vector or high-resolution images.')).prependTo("body")
         }
     };
     b.forms = {};
