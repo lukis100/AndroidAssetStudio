@@ -100,6 +100,10 @@
       $('#generate-web-button').click(function() {
         regenerate(true, true);
       });
+	  
+	  $("div[id='outputs']").on("click","h3 a[data-downloadurl",function(e) {
+	    appInsights.trackEvent("DownloadZipApp");
+	  });
 
       var zipper = studio.zip.createDownloadifyZipButton($('#zip-button-stub'));
 

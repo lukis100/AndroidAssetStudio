@@ -98,6 +98,10 @@
       $('#generate-web-button').click(function() {
         regenerate(true, true);
       });
+	  
+	  $("div[id='outputs']").on("click","h3 a[data-downloadurl",function(e) {
+	    appInsights.trackEvent("DownloadZipManifest");
+	  });
 
       var zipper = studio.zip.createDownloadifyZipButton($('#zip-button-stub'));
 
