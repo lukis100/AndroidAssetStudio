@@ -1,4 +1,4 @@
-Windows Asset Studio
+Windows Asset Creator
 ====================
 
 **[Open the Windows Asset Creator](http://lukis100.github.io/WindowsAssetCreator/)**
